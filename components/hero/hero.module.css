@@ -1,0 +1,7 @@
+.visual {
+  background: #111111 url('/models/hero-poster.png') center / cover no-repeat;
+}
+
+@media (max-width: 767px) {
+  .visual { background-image: url('/models/hero-poster-mobile.png'); }
+}

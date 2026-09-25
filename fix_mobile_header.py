@@ -1,0 +1,15 @@
+import os
+files = ['app/page.tsx', 'app/about/page.tsx', 'app/services/page.tsx']
+for path in files:
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            c = f.read()
+            
+        c = c.replace('/autotricks logo.png', '/autotricks-logo.png')
+        # Fix the huge mobile margin so it doesn't push the logo too far right on mobile screens
+        c = c.replace('ml-8 md:ml-24 group', 'ml-0 md:ml-24 group')
+        c = c.replace('ml-8 md:ml-40 group', 'ml-0 md:ml-40 group')
+        
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(c)
+        print('Fixed logo src and margin in', path)

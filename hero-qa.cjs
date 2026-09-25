@@ -1,0 +1,24 @@
+const {chromium}=require('C:/Users/keert/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{
+ const browser=await chromium.launch({headless:true,channel:'msedge',args:['--enable-webgl','--ignore-gpu-blocklist']});
+ const page=await browser.newPage({viewport:{width:1440,height:900}});
+ await page.addInitScript(()=>{Object.defineProperty(navigator,'deviceMemory',{get:()=>8});});
+ page.on('requestfailed',r=>console.log('REQUEST_FAILED',r.url(),r.failure()));
+ page.on('pageerror',e=>console.log('PAGE_ERROR',e.message));
+ page.on('console',m=>{if(m.type()==='error')console.log('CONSOLE_ERROR',m.text())});
+ await page.goto('http://127.0.0.1:3000',{waitUntil:'networkidle',timeout:120000});
+ console.log('STATE',await page.evaluate(()=>({memory:navigator.deviceMemory,cores:navigator.hardwareConcurrency,saveData:navigator.connection?.saveData,host:document.querySelector('#home [aria-hidden]')?.outerHTML})));
+ await page.locator('[data-ready="true"]').waitFor({timeout:45000}).catch(async e=>{console.log('FAILURE_STATE',await page.locator('#home [aria-hidden]').first().evaluate(e=>e.outerHTML));await page.screenshot({path:'artifacts/hero-failure.png'});throw e;});
+ await page.evaluate(()=>window.scrollTo({top:675,behavior:'instant'}));
+ await page.waitForTimeout(1500);
+ await page.screenshot({path:'artifacts/hero-desktop.png'});
+ await page.locator('#home canvas').screenshot({path:'public/models/hero-poster.png'});
+ console.log('DESKTOP',await page.evaluate(()=>({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth})));
+ await page.setViewportSize({width:390,height:844});
+ await page.evaluate(()=>window.scrollTo({top:633,behavior:'instant'}));
+ await page.waitForTimeout(1500);
+ await page.screenshot({path:'artifacts/hero-mobile.png'});
+ await page.locator('#home canvas').screenshot({path:'public/models/hero-poster-mobile.png'});
+ console.log('MOBILE',await page.evaluate(()=>({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth})));
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

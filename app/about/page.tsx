@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight, Settings, Users, Star, Clock, CheckCircle2, Factory, Phone, Mail, MapPin, Wrench } from "lucide-react";
+import { ArrowRight, HeartHandshake, BadgeCheck, Headset, ShieldCheck, Settings, Users, Star, Clock, CheckCircle2, Factory, Phone, Mail, MapPin, Wrench } from "lucide-react";
 
 // Social Icons Data Component
 const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -29,6 +29,7 @@ const InstagramIconExact = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function AboutPage() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,12 +44,9 @@ export default function AboutPage() {
 
             {/* Common Header Wrapper */}
             <div className={`w-full flex justify-center sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-[#111111]/80 backdrop-blur-lg border-b border-white/5 shadow-sm' : 'bg-[#111111] border-b border-transparent'}`}>
-                <header className="relative z-20 flex-shrink-0 flex items-center justify-between px-10 py-3 max-w-[1400px] w-full">
-                    <a href="/" className="flex items-center gap-2 ml-2 md:ml-24 group">
-                        <div className="bg-[#FF7A00] p-1.5 rounded-md">
-                            <Wrench className="w-4 h-4 text-white transform group-hover:rotate-12 transition-transform duration-300" strokeWidth={2.5} />
-                        </div>
-                        <span className="text-[17px] font-black tracking-wide text-white group-hover:text-gray-200 transition-colors">AutoTricks</span>
+                <header className="relative z-20 flex-shrink-0 flex items-center justify-between px-10 py-0 max-w-[1400px] w-full">
+                    <a href="/" className="flex items-center gap-2 ml-0 md:ml-40 group">
+                        <img src="/autotricks logo.png" alt="AutoTricks" className="h-12 md:h-[50px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
                     </a>
 
                     <nav className="hidden md:flex gap-10 text-xs font-medium text-gray-300">
@@ -62,7 +60,43 @@ export default function AboutPage() {
                     <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="hidden md:inline-block bg-[#FF7A00] hover:bg-[#e06b00] text-white px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors mr-2 md:mr-24">
                         Book Service
                     </button>
+
+
+                    <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+                    </button>
                 </header>
+
+                {/* Mobile Menu Overlay */}
+
+                {/* Mobile Menu Backdrop */}
+                <div
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`md:hidden fixed inset-0 bg-black/60 z-[55] transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                />
+
+                {/* Mobile Menu Sidebar */}
+                <div className={`md:hidden fixed inset-y-0 right-0 w-[75vw] sm:w-[300px] bg-[#111111] z-[60] flex flex-col pt-24 px-8 transition-transform duration-300 ease-in-out border-l border-white/10 shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                    <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-5 right-6 text-white p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+
+                    <div className="flex items-center gap-2 mb-10">
+                        <img src="/autotricks logo.png" alt="AutoTricks" className="h-10 w-auto object-contain" />
+                    </div>
+
+                    <nav className="flex flex-col gap-6 text-lg font-semibold text-white/90">
+                        <a href="/#home" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Home</a>
+                        <a href="/#services" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Services</a>
+                        <a href="/#why-us" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Why Us</a>
+                        <a href="/#how-it-works" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">How It Works</a>
+                        <a href="/about" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">About</a>
+                    </nav>
+
+                    <button onClick={() => { setIsMobileMenuOpen(false); if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="mt-8 bg-[#FF7A00] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_4px_20px_rgba(255,122,0,0.3)] w-full text-center">
+                        Book Service Now
+                    </button>
+                </div>
             </div>
 
             {/* Main Content */}
@@ -111,32 +145,40 @@ export default function AboutPage() {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group">
-                                <Users className="w-8 h-8 text-[#FF7A00] transition-transform group-hover:scale-110" />
+                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-[20px] flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(255,122,0,0.06)] transition-all">
+                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                    <HeartHandshake className="w-6 h-6 text-[#FF7A00]" strokeWidth={1.75} />
+                                </div>
                                 <div>
-                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A]">10,000+</h4>
-                                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Happy Customers</p>
+                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A] mb-0.5">500+</h4>
+                                    <p className="text-[9.5px] text-gray-500 font-extrabold uppercase tracking-wide">Happy Customers</p>
                                 </div>
                             </div>
-                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group">
-                                <Star className="w-8 h-8 text-[#FF7A00] transition-transform group-hover:scale-110" />
+                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-[20px] flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(255,122,0,0.06)] transition-all">
+                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                    <BadgeCheck className="w-6 h-6 text-[#FF7A00]" strokeWidth={1.75} />
+                                </div>
                                 <div>
-                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A]">4.9/5</h4>
-                                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Average Rating</p>
+                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A] mb-0.5">4.9/5</h4>
+                                    <p className="text-[9.5px] text-gray-500 font-extrabold uppercase tracking-wide">Average Rating</p>
                                 </div>
                             </div>
-                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group">
-                                <Clock className="w-8 h-8 text-[#FF7A00] transition-transform group-hover:scale-110" />
+                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-[20px] flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(255,122,0,0.06)] transition-all">
+                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                    <Headset className="w-6 h-6 text-[#FF7A00]" strokeWidth={1.75} />
+                                </div>
                                 <div>
-                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A]">24/7</h4>
-                                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Support Available</p>
+                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A] mb-0.5">24/7</h4>
+                                    <p className="text-[9.5px] text-gray-500 font-extrabold uppercase tracking-wide">Support Available</p>
                                 </div>
                             </div>
-                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group">
-                                <Factory className="w-8 h-8 text-[#FF7A00] transition-transform group-hover:scale-110" />
+                            <div className="bg-[#FFF4E5] border border-[#FF7A00]/10 p-6 rounded-[20px] flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(255,122,0,0.06)] transition-all">
+                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                    <ShieldCheck className="w-6 h-6 text-[#FF7A00]" strokeWidth={1.75} />
+                                </div>
                                 <div>
-                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A]">100%</h4>
-                                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Genuine Parts</p>
+                                    <h4 className="text-lg md:text-xl font-black text-[#1A1A1A] mb-0.5">100%</h4>
+                                    <p className="text-[9.5px] text-gray-500 font-extrabold uppercase tracking-wide">Genuine Parts</p>
                                 </div>
                             </div>
                         </div>
@@ -164,28 +206,29 @@ export default function AboutPage() {
                 <div className="w-full max-w-[1150px] flex flex-col md:flex-row justify-between items-start gap-10 md:gap-4 lg:gap-8 mx-auto relative z-10 overflow-hidden">
                     {/* Column 1: Branding & Social (Left Anchor) */}
                     <div className="flex flex-col items-start pr-2 md:pr-4 md:w-[25%] lg:w-[30%] shrink-0">
-                        <a href="/" className="flex items-center gap-2 mb-4 group cursor-pointer">
-                            <div className="bg-[#FF7A00] p-1.5 rounded-md">
-                                <Wrench className="w-4 h-4 text-white transform group-hover:rotate-12 transition-transform duration-300" strokeWidth={2.5} />
-                            </div>
-                            <span className="text-white text-[18px] font-black tracking-wide group-hover:text-gray-200 transition-colors">AutoTricks</span>
+                        <a href="/" className="flex items-center gap-2 mb-6 md:mb-5 group cursor-pointer">
+                            <img src="/autotricks logo.png" alt="AutoTricks" className="h-[75px] md:h-[90px] lg:h-[100px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
                         </a>
                         <p className="text-[12px] font-medium text-gray-500 mb-6 tracking-wide">
                             Car Service. At Your Doorstep.
                         </p>
                         <div className="flex items-center gap-3">
-                            {[InstagramIcon, FacebookIcon, YoutubeIcon].map((SocialIcon, idx) => (
-                                <div key={idx} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 hover:border-white/20 transition-colors">
-                                    <SocialIcon className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                                </div>
+                            {[
+                                { Icon: InstagramIcon, href: 'https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5' },
+                                { Icon: FacebookIcon, href: '#' },
+                                { Icon: YoutubeIcon, href: '#' }
+                            ].map((social, idx) => (
+                                <a key={idx} href={social.href} target={social.href !== '#' ? "_blank" : undefined} rel={social.href !== '#' ? "noopener noreferrer" : undefined} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 hover:border-white/20 transition-colors">
+                                    <social.Icon className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                                </a>
                             ))}
                         </div>
                     </div>
 
                     {/* Right Side Group: Links & Contact */}
-                    <div className="w-full md:w-auto grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-16 xl:gap-20 md:ml-auto">
+                    <div className="w-full md:w-auto grid grid-cols-2 sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-16 xl:gap-20 md:ml-auto">
                         {/* Column 2: Quick Links */}
-                        <div className="flex flex-col items-start">
+                        <div className="flex flex-col items-start order-2 sm:order-1">
                             <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Quick Links</h4>
                             <ul className="flex flex-col gap-3.5">
                                 {[
@@ -205,7 +248,7 @@ export default function AboutPage() {
                         </div>
 
                         {/* Column 3: Our Services */}
-                        <div className="flex flex-col items-start">
+                        <div className="flex flex-col items-start order-1 sm:order-2">
                             <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Our Services</h4>
                             <ul className="flex flex-col gap-3.5">
                                 {['Periodic Service', 'Engine Diagnostics', 'Brake Service', 'AC Service', 'General Repairs'].map((service, idx) => (
@@ -219,16 +262,16 @@ export default function AboutPage() {
                         </div>
 
                         {/* Column 4: Contact Us */}
-                        <div className="flex flex-col items-start">
+                        <div className="flex flex-col items-start col-span-2 sm:col-span-1 pt-2 sm:pt-0 order-3 md:order-3">
                             <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Contact Us</h4>
                             <div className="flex flex-col gap-4">
                                 <div className="flex items-center gap-3">
                                     <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                                    <span className="text-[12px] font-medium text-gray-400">+91 98765 43210</span>
+                                    <span className="text-[12px] font-medium text-gray-400">+91 87543 99388</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Mail className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                                    <span className="text-[12px] font-medium text-gray-400">care@autotricks.in</span>
+                                    <span className="text-[12px] font-medium text-gray-400">autotricks08@gmail.com</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
@@ -249,10 +292,10 @@ export default function AboutPage() {
 
             {/* Floating Social Icons */}
             <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-                <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group border border-gray-100 relative">
-                    <InstagramIconExact className="w-4 h-4 text-[#E1306C]" />
+                <a href="https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group border border-gray-100 relative">
+          <InstagramIconExact className="w-4 h-4 text-[#E1306C]" />
                 </a>
-                <a href="https://wa.me/916383629997?text=Hi%20AutoTricks,%20I%20would%20like%20to%20book%20a%20service." target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group relative">
+                <a href="https://wa.me/918754399388?text=Hi%20AutoTricks,%20I%20would%20like%20to%20book%20a%20service." target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group relative">
                     <WhatsAppIconExact className="w-4 h-4 text-white" />
                 </a>
             </div>

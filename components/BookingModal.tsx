@@ -133,7 +133,7 @@ export default function BookingModal() {
                 {!isSubmitted && (
                     <>
                         <div className="flex items-center justify-center gap-2.5 mt-4 pt-3 border-t border-gray-100">
-                            <a href={`https://wa.me/916383629997?text=${encodeURIComponent(selectedService ? "Hi AutoTricks, I would like to book the " + selectedService + "." : "Hi AutoTricks, I would like to book a service.")}`} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-[#F4F6F9] hover:bg-[#E8F0ED] text-[#25D366] transition-colors border border-transparent hover:border-[#25D366]/30 group">
+                            <a href={`https://wa.me/918754399388?text=${encodeURIComponent(selectedService ? "Hi AutoTricks, I would like to book the " + selectedService + "." : "Hi AutoTricks, I would like to book a service.")}`} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-[#F4F6F9] hover:bg-[#E8F0ED] text-[#25D366] transition-colors border border-transparent hover:border-[#25D366]/30 group">
                                 <WhatsAppIconExact className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
                                 <span className="font-bold text-[10px] text-[#1A1A1A]">WhatsApp</span>
                             </a>

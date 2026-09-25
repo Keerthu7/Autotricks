@@ -1,4 +1,6 @@
 "use client";
+import Hero3D from "@/components/hero/Hero3D";
+import { useHeroScroll } from "@/components/hero/useHeroScroll";
 import React, { useEffect, useRef, useState } from "react";
 import { UserCheck, ShieldCheck, MapPin, ArrowRight, Wrench, Activity, Disc, Wind, BatteryCharging, Settings, CalendarDays, CarFront, Home as HomeIcon, Building2, Tag, Clock, Phone, Mail } from "lucide-react";
 
@@ -35,197 +37,152 @@ const InstagramIconExact = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const HeroScrollAnimation = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const frameCount = 50;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
 
-  const currentFrame = (index: number) =>
-    `/1st section/ezgif-frame-${index.toString().padStart(3, "0")}.jpg`;
+  const mobileContainerRef = useRef<HTMLElement>(null);
+  const mobileTextRef = useRef<HTMLDivElement>(null);
+
+  useHeroScroll(containerRef, textRef);
+  useHeroScroll(mobileContainerRef, mobileTextRef);
 
   useEffect(() => {
-    // Preload images
-    const loadImages = async () => {
-      const loadedImages = [];
-      for (let i = 1; i <= frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
-        await new Promise((resolve) => {
-          img.onload = resolve;
-        });
-        loadedImages.push(img);
-      }
-      setImages(loadedImages);
-    };
-
-    loadImages();
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => { });
+    }
+    if (desktopVideoRef.current) {
+      desktopVideoRef.current.play().catch(() => { });
+    }
   }, []);
 
-  useEffect(() => {
-    if (images.length === 0 || !canvasRef.current || !containerRef.current) return;
-
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    if (!context) return;
-
-    const render = (img: HTMLImageElement) => {
-      if (!canvas || !context) return;
-      const { innerWidth: width, innerHeight: height, devicePixelRatio = 1 } = window;
-
-      // Scale canvas internal resolution to physical pixels
-      canvas.width = width * devicePixelRatio;
-      canvas.height = height * devicePixelRatio;
-
-      // Keep canvas CSS size identical to logical pixels
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-
-      // Scale context to use logical CSS pixels
-      context.scale(devicePixelRatio, devicePixelRatio);
-
-      // Cover scaling calculation based on logical limits
-      const hRatio = width / img.width;
-      const vRatio = height / img.height;
-      const ratio = Math.max(hRatio, vRatio);
-      const centerShift_x = (width - img.width * ratio) / 2;
-      const centerShift_y = (height - img.height * ratio) / 2;
-
-      context.clearRect(0, 0, width, height);
-      context.drawImage(
-        img,
-        0,
-        0,
-        img.width,
-        img.height,
-        centerShift_x,
-        centerShift_y,
-        img.width * ratio,
-        img.height * ratio
-      );
-    };
-
-    // Draw first frame immediately
-    render(images[0]);
-
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-
-      const { top, height } = containerRef.current.getBoundingClientRect();
-      const scrollY = -top;
-      const maxScroll = height - window.innerHeight;
-
-      let scrollFraction = scrollY / maxScroll;
-      if (scrollFraction < 0) scrollFraction = 0;
-      if (scrollFraction > 1) scrollFraction = 1;
-
-      if (textRef.current) {
-        textRef.current.style.setProperty('--hero-scroll-p', scrollFraction.toString());
-      }
-
-      const frameIndex = Math.min(
-        frameCount - 1,
-        Math.floor(scrollFraction * frameCount)
-      );
-
-      requestAnimationFrame(() => render(images[frameIndex]));
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", () => {
-      const { top, height } = containerRef.current!.getBoundingClientRect();
-      const scrollY = -top;
-      const maxScroll = height - window.innerHeight;
-      let scrollFraction = scrollY / maxScroll;
-      if (scrollFraction < 0) scrollFraction = 0;
-      if (scrollFraction > 1) scrollFraction = 1;
-      const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
-      render(images[frameIndex]);
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [images]);
-
   return (
-    <section ref={containerRef} id="home" className="h-[250vh] bg-[#111111] text-white relative w-full">
-      <div className="sticky top-0 h-[100dvh] overflow-hidden flex flex-col w-full">
-        {/* Background Image Setup (Canvas replacing static image) */}
-        <div className="absolute inset-0 z-0 bg-[#111111]">
-          <canvas ref={canvasRef} className="w-full h-full" />
+    <>
+      {/* MOBILE HERO (Video, 180vh, scroll-driven text) */}
+      <section ref={mobileContainerRef} id="home-mobile" className="md:hidden h-[180vh] bg-[#111111] text-white relative w-full">
+        <div className="sticky top-0 h-[85dvh] overflow-hidden flex flex-col w-full">
+          <div className="absolute inset-0 z-0 bg-[#111111]">
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+              src="/Autotricks%20hero%20video.mp4"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/30 to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/80 via-[#111111]/30 to-transparent z-10 pointer-events-none" />
+          </div>
+          <main className="relative z-20 flex-1 flex flex-col justify-center px-6 w-full mt-24 mb-10 pointer-events-none">
+            <div ref={mobileTextRef} className="w-full pointer-events-auto" style={{ opacity: 'calc(var(--hero-scroll-p, 0) * 2.5)', transform: 'translateY(calc(40px - 40px * var(--hero-scroll-p, 0)))' }}>
+              <p className="text-gray-300/80 text-[9px] font-semibold tracking-[0.25em] mb-3 uppercase">
+                Premium car service at your doorstep
+              </p>
+              <h1 className="text-3xl font-bold leading-[1.1] mb-4">
+                We Keep Your <br />
+                <span className="text-[#FF7A00]">Car Moving</span>
+              </h1>
+              <p className="text-[#d4d4d8] text-xs max-w-[24rem] leading-relaxed mb-6">
+                Professional car service, right at your doorstep.<br />
+                No workshop visits. No hassle. Just smooth rides.
+              </p>
 
-          {/* Main left-side gradient for text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] from-10% via-[#111111]/75 via-45% to-transparent to-60% z-10 pointer-events-none" />
+              <div className="flex flex-col gap-5 mb-8">
+                <div className="flex items-center gap-2">
+                  <UserCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
+                  <div>
+                    <h3 className="font-semibold text-[11px]">Expert Technicians</h3>
+                    <p className="text-[9px] text-[#A1A1AA]">Certified & Trusted</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
+                  <div>
+                    <h3 className="font-semibold text-[11px]">Quality Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA]">Genuine Parts</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#FF7A00]" />
+                  <div>
+                    <h3 className="font-semibold text-[11px]">Doorstep Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA]">Anywhere in Your City</p>
+                  </div>
+                </div>
+              </div>
+
+              <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-6 py-2.5 rounded-full text-[11px] font-bold flex items-center w-max gap-1.5 transition-all shadow-[0_4px_20px_rgba(255,122,0,0.25)]">
+                Book Your Service
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </main>
         </div>
+      </section>
 
-        {/* Hero Content */}
-        <main className="relative z-20 flex-1 flex flex-col justify-center max-w-[1400px] mx-auto px-10 w-full mb-10 pointer-events-none">
-          <div ref={textRef} className="max-w-2xl ml-6 md:ml-10 mt-2 md:mt-4 pointer-events-auto" style={{ opacity: 'calc(var(--hero-scroll-p, 0) * 2)', transform: 'translateY(calc(30px - 30px * var(--hero-scroll-p, 0)))' }}>
-            <p className="text-gray-300/80 text-[9px] md:text-[10px] font-semibold tracking-[0.25em] mb-3 uppercase">
-              Premium car service at your doorstep
-            </p>
-
-            <h1 className="text-3xl md:text-4xl font-bold leading-[1.1] mb-4">
-              We Keep Your <br />
-              <span className="text-[#FF7A00]">Car Moving</span>
-            </h1>
-
-            <p className="text-[#d4d4d8] text-xs md:text-[12px] max-w-[24rem] leading-relaxed mb-6">
-              Professional car service, right at your doorstep.<br />
-              No workshop visits. No hassle. Just smooth rides.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8">
-              <div className="flex items-center gap-2">
-                <UserCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
-                <div>
-                  <h3 className="font-semibold text-[11px] md:text-[10px]">Expert Technicians</h3>
-                  <p className="text-[9px] text-[#A1A1AA]">Certified & Trusted</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 sm:border-l sm:border-white/10 sm:pl-5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
-                <div>
-                  <h3 className="font-semibold text-[11px] md:text-[10px]">Quality Service</h3>
-                  <p className="text-[9px] text-[#A1A1AA]">Genuine Parts</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 sm:border-l sm:border-white/10 sm:pl-5">
-                <MapPin className="w-3.5 h-3.5 text-[#FF7A00]" />
-                <div>
-                  <h3 className="font-semibold text-[11px] md:text-[10px]">Doorstep Delivery</h3>
-                  <p className="text-[9px] text-[#A1A1AA]">Anywhere in Your City</p>
-                </div>
-              </div>
-            </div>
-
-            <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-5 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_24px_rgba(255,122,0,0.3)]">
-              Book Your Service
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+      {/* DESKTOP HERO (Video, 250vh, scroll-driven) */}
+      <section ref={containerRef} id="home-desktop" className="hidden md:block h-[250vh] bg-[#111111] text-white relative w-full">
+        <div className="sticky top-0 h-[100dvh] overflow-hidden flex flex-col w-full">
+          <div className="absolute inset-0 z-0 bg-[#111111]">
+            <video
+              ref={desktopVideoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+              src="/Autotricks%20hero%20video.mp4"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111111] from-10% via-[#111111]/75 via-45% to-transparent to-60% z-10 pointer-events-none" />
           </div>
 
-          {/* Floating location card */}
-          <div className="absolute bottom-6 right-8 hidden md:flex items-center gap-2 scale-90 md:scale-100 origin-bottom-right">
-            <div className="relative border border-white/10 bg-black/60 shadow-2xl backdrop-blur-md pl-2.5 pr-4 py-1.5 rounded-[2rem] flex items-center gap-1.5">
-              {/* Soft decorative glow behind pin */}
-              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 bg-[#FF7A00]/20 blur-md rounded-full pointer-events-none" />
-
-              <div className="text-[#FF7A00] relative z-10">
-                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+          <main className="relative z-20 flex-1 flex flex-col justify-center max-w-[1400px] mx-auto px-10 w-full mb-10 pointer-events-none">
+            <div ref={textRef} className="max-w-2xl ml-10 mt-4 pointer-events-auto" style={{ opacity: 'calc(var(--hero-scroll-p, 0) * 2)', transform: 'translateY(calc(30px - 30px * var(--hero-scroll-p, 0)))' }}>
+              <p className="text-gray-300/80 text-[10px] font-semibold tracking-[0.25em] mb-3 uppercase">
+                Premium car service at your doorstep
+              </p>
+              <h1 className="text-4xl font-bold leading-[1.1] mb-4">
+                We Keep Your <br />
+                <span className="text-[#FF7A00]">Car Moving</span>
+              </h1>
+              <p className="text-[#d4d4d8] text-[12px] max-w-[24rem] leading-relaxed mb-6">
+                Professional car service, right at your doorstep.<br />
+                No workshop visits. No hassle. Just smooth rides.
+              </p>
+              <div className="flex flex-row items-center gap-5 mb-8">
+                <div className="flex items-center gap-2">
+                  <UserCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
+                  <div>
+                    <h3 className="font-semibold text-[10px]">Expert Technicians</h3>
+                    <p className="text-[9px] text-[#A1A1AA]">Certified & Trusted</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 border-l border-white/10 pl-5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
+                  <div>
+                    <h3 className="font-semibold text-[10px]">Quality Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA]">Genuine Parts</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 border-l border-white/10 pl-5">
+                  <MapPin className="w-3.5 h-3.5 text-[#FF7A00]" />
+                  <div>
+                    <h3 className="font-semibold text-[10px]">Doorstep Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA]">Anywhere in Your City</p>
+                  </div>
+                </div>
               </div>
-              <div className="pl-0.5">
-                <h3 className="font-bold text-[10px] tracking-wide text-white">We come to you</h3>
-                <p className="text-[8px] text-gray-400">Doorstep Car Service</p>
-              </div>
+              <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-5 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_24px_rgba(255,122,0,0.3)]">
+                Book Your Service
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </div>
-          </div>
-        </main>
-      </div>
-    </section>
+          </main>
+        </div>
+      </section>
+    </>
   );
 };
 
@@ -273,6 +230,8 @@ const Section3ScrollAnimation = () => {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       context.scale(devicePixelRatio, devicePixelRatio);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
 
       const hRatio = width / img.width;
       const vRatio = height / img.height;
@@ -295,13 +254,18 @@ const Section3ScrollAnimation = () => {
 
       context.clearRect(0, 0, width, height);
 
-      // 1. Draw the image
+      // 1. Draw the image with a subtle 8% crop on all sides to eliminate baked-in AI watermarks
+      const cropX = img.width * 0.08;
+      const cropY = img.height * 0.08;
+      const cropW = img.width * 0.84;
+      const cropH = img.height * 0.84;
+
       context.drawImage(
         img,
-        0,
-        0,
-        img.width,
-        img.height,
+        cropX,
+        cropY,
+        cropW,
+        cropH,
         centerShift_x,
         centerShift_y,
         drawnWidth,
@@ -381,11 +345,11 @@ const Section3ScrollAnimation = () => {
   }, [images]);
 
   return (
-    <section id="why-us" ref={containerRef} className="relative w-full h-[150vh] bg-[#13171F]">
-      <div className="sticky top-0 h-[100dvh] w-full flex items-center bg-[#13171F] overflow-hidden">
+    <section id="why-us" ref={containerRef} className="relative w-full md:h-[150vh] bg-[#13171F]">
+      <div className="md:sticky top-0 md:h-[100dvh] py-12 md:py-0 w-full flex items-center bg-[#13171F] overflow-hidden">
         {/* Background Image Setup */}
         <div className="absolute inset-0 z-0 bg-[#13171F]">
-          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-90" />
+          <canvas ref={canvasRef} className="hidden md:block absolute inset-0 w-full h-full opacity-90" />
 
           {/* Edge fading shades to blend the video on all borders */}
           <div className="absolute inset-x-0 top-0 h-[15%] bg-gradient-to-b from-[#13171F] to-transparent z-10 pointer-events-none" />
@@ -490,6 +454,7 @@ const Section3ScrollAnimation = () => {
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -503,12 +468,9 @@ export default function Home() {
     <div className="bg-[#FFFFFF] font-sans w-full min-h-screen flex flex-col">
       {/* Common Header Wrapper */}
       <div className={`w-full flex justify-center fixed top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[#111111]/80 backdrop-blur-lg border-b border-white/5 shadow-sm' : 'bg-transparent border-b border-transparent'}`}>
-        <header className="relative z-20 flex-shrink-0 flex items-center justify-between px-6 md:px-10 py-3 max-w-[1400px] mx-auto w-full">
-          <a href="/" className="flex items-center gap-2 ml-2 md:ml-10 group">
-            <div className="bg-[#FF7A00] p-1.5 rounded-md">
-              <Wrench className="w-4 h-4 text-white transform group-hover:rotate-12 transition-transform duration-300" strokeWidth={2.5} />
-            </div>
-            <span className="text-[17px] font-black tracking-wide text-white group-hover:text-gray-200 transition-colors">AutoTricks</span>
+        <header className="relative z-20 flex-shrink-0 flex items-center justify-between px-6 md:px-10 py-0 max-w-[1400px] mx-auto w-full">
+          <a href="/" className="flex items-center gap-2 ml-0 md:ml-24 group">
+            <img src="/autotricks logo.png" alt="AutoTricks" className="h-12 md:h-[50px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
           </a>
 
           <nav className="hidden md:flex gap-10 text-xs font-medium text-gray-300">
@@ -522,7 +484,43 @@ export default function Home() {
           <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="hidden md:inline-block bg-[#FF7A00] hover:bg-[#e06b00] text-white px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors mr-2 md:mr-10">
             Book Service
           </button>
+
+
+          <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors mr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+          </button>
         </header>
+
+        {/* Mobile Menu Overlay */}
+
+        {/* Mobile Menu Backdrop */}
+        <div
+          onClick={() => setIsMobileMenuOpen(false)}
+          className={`md:hidden fixed inset-0 bg-black/60 z-[55] transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        />
+
+        {/* Mobile Menu Sidebar */}
+        <div className={`md:hidden fixed inset-y-0 right-0 w-[75vw] sm:w-[300px] bg-[#111111] z-[60] flex flex-col pt-24 px-8 transition-transform duration-300 ease-in-out border-l border-white/10 shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-5 right-6 text-white p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+
+          <div className="flex items-center gap-2 mb-10">
+            <img src="/autotricks logo.png" alt="AutoTricks" className="h-10 w-auto object-contain" />
+          </div>
+
+          <nav className="flex flex-col gap-6 text-lg font-semibold text-white/90">
+            <a href="/#home" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Home</a>
+            <a href="/#services" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Services</a>
+            <a href="/#why-us" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Why Us</a>
+            <a href="/#how-it-works" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">How It Works</a>
+            <a href="/about" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">About</a>
+          </nav>
+
+          <button onClick={() => { setIsMobileMenuOpen(false); if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="mt-8 bg-[#FF7A00] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_4px_20px_rgba(255,122,0,0.3)] w-full text-center">
+            Book Service Now
+          </button>
+        </div>
       </div>
 
       <HeroScrollAnimation />
@@ -549,7 +547,7 @@ export default function Home() {
           </div>
 
           {/* Right Cards Grid */}
-          <div className="w-full md:w-[70%] lg:w-[67%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
+          <div className="w-full md:w-[70%] lg:w-[67%] grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
 
             {/* Card 1 */}
             <div className="bg-[#FFF4E5] border border-[#FF7A00]/20 py-3.5 px-5 sm:px-6 rounded-[14px] transition-transform duration-300 hover:scale-[1.02] flex flex-col justify-center min-h-[110px]">
@@ -618,59 +616,95 @@ export default function Home() {
       <Section3ScrollAnimation />
 
       {/* 4th Section - How It Works */}
-      <section id="how-it-works" className="relative w-full py-6 md:py-8 bg-white overflow-hidden flex justify-center px-6 sm:px-10 lg:pl-16 lg:pr-8">
+      <section id="how-it-works" className="relative w-full py-12 md:py-8 bg-white overflow-hidden flex justify-center px-6 sm:px-10 lg:pl-16 lg:pr-8">
 
-        <div className="w-full max-w-[1300px] flex flex-col z-10 w-full lg:w-auto relative">
-
+        {/* ===================== MOBILE VIEW (New Grid Layout) ===================== */}
+        <div className="w-full max-w-[1300px] flex flex-col z-10 relative md:hidden">
           {/* Heading */}
-          <div className="mb-8 lg:mb-10 w-full pl-2">
-            <h6 className="text-[#64748B] text-[8.5px] sm:text-[9px] font-bold tracking-[0.22em] mb-2 uppercase">
+          <div className="mb-10 w-full text-center pl-2">
+            <h6 className="text-[#64748B] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
               Simple Steps. Big Convenience.
             </h6>
-            <h2 className="text-[26px] sm:text-[30px] lg:text-[34px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-tight">
+            <h2 className="text-[28px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-tight">
               How It Works
             </h2>
           </div>
 
-          {/* Inline Content Row: 4 Grids + Image */}
-          <div className="flex flex-row items-center justify-between w-full gap-4 md:gap-6 lg:gap-10">
-
-            {/* The 4 Grids / Steps (Individual Cards) */}
-            <div className="flex flex-row items-center justify-between w-[68%] xl:w-[70%] gap-2 sm:gap-3 lg:gap-4 relative z-10">
+          <div className="flex flex-col items-center justify-between w-full gap-12">
+            {/* The 4 Grids / Steps */}
+            <div className="grid grid-cols-2 gap-4 w-full relative z-10">
               {[
                 { num: "01", title: "Book Your Service", desc: "Choose your service and preferred time.", icon: CalendarDays, active: true },
                 { num: "02", title: "We Come to You", desc: "Our team reaches your location on time.", icon: MapPin },
                 { num: "03", title: "Service & Check", desc: "Expert service with genuine parts.", icon: Wrench },
                 { num: "04", title: "Back on the Road", desc: "Your car is ready, we deliver it to you.", icon: CarFront },
               ].map((step, idx) => (
-                <div key={idx} className="relative flex flex-col items-start w-full flex-1 bg-[#FFF4E5] border border-[#FF7A00]/20 p-2.5 sm:p-3 lg:p-4 rounded-[14px] transition-transform duration-300 hover:-translate-y-1">
-
-                  {/* Icon Node */}
-                  <div className={`mb-2 md:mb-3 lg:mb-4 rounded-full flex items-center justify-center ${step.active ? 'p-[2.5px] md:p-[3px] lg:p-[4px] border-[1.5px] border-[#FF7A00]/60 -ml-[2px] md:-ml-[3px] lg:-ml-[4px]' : 'p-[2.5px] md:p-[3px] lg:p-[4px] border-[1.5px] border-transparent'}`}>
-                    <div className="w-7 h-7 md:w-9 md:h-9 lg:w-11 lg:h-11 bg-white rounded-full flex items-center justify-center shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-                      <step.icon className={`w-3.5 h-3.5 md:w-3.5 md:h-3.5 lg:w-[18px] lg:h-[18px] ${step.active ? 'text-[#1A1A1A]' : 'text-[#475569]'}`} strokeWidth={2.2} />
+                <div key={idx} className="relative flex flex-col items-start w-full bg-[#FFF4E5] border border-[#FF7A00]/20 p-4 rounded-[20px]">
+                  <div className={`mb-4 rounded-full flex items-center justify-center ${step.active ? 'p-[4px] border-[2px] border-[#FF7A00]/60 -ml-[3px]' : 'p-[4px] border-[2px] border-transparent'}`}>
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.04)]">
+                      <step.icon className={`w-4 h-4 ${step.active ? 'text-[#1A1A1A]' : 'text-[#475569]'}`} strokeWidth={2.2} />
                     </div>
                   </div>
-
-                  {/* Structural Arrow */}
-                  {idx !== 3 && (
-                    <div className="block absolute top-[40%] -right-1 sm:-right-2 lg:-right-3 translate-x-full -translate-y-1/2 z-20">
-                      <ArrowRight className="w-2.5 h-2.5 md:w-3 md:h-3 lg:w-4 lg:h-4 text-[#FF7A00] opacity-80" strokeWidth={3} />
-                    </div>
-                  )}
-
-                  {/* Text Content */}
-                  <div className="text-[7.5px] md:text-[9.5px] lg:text-[10.5px] font-bold text-[#475569] mb-0.5">{step.num}</div>
-                  <div className="text-[8.5px] md:text-[10.5px] lg:text-[11.5px] font-bold text-[#1A1A1A] mb-0.5 leading-tight pr-1">{step.title}</div>
-                  <p className="text-[7px] md:text-[8.5px] lg:text-[10px] text-[#64748B] leading-[1.3] pr-1">
-                    {step.desc}
-                  </p>
-
+                  <div className="text-[11px] font-extrabold text-[#94A3B8] mb-1">{step.num}</div>
+                  <div className="text-[13px] font-bold text-[#1A1A1A] mb-1.5 leading-snug pr-2">{step.title}</div>
+                  <p className="text-[11px] text-[#64748B] leading-relaxed">{step.desc}</p>
                 </div>
               ))}
             </div>
 
-            {/* Van Image Immediately Next to 4th Grid */}
+            {/* Van Image */}
+            <div className="w-full sm:w-[80%] flex justify-center flex-shrink-0 relative mt-4">
+              <img
+                src="/4th section.png"
+                alt="AutoTricks Van"
+                className="w-full mix-blend-multiply [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)]"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ===================== DESKTOP VIEW (Original Layout) ===================== */}
+        <div className="w-full max-w-[1300px] hidden md:flex flex-col z-10 w-full lg:w-auto relative">
+          {/* Heading */}
+          <div className="mb-8 lg:mb-10 w-full pl-2">
+            <h6 className="text-[#64748B] text-[9px] font-bold tracking-[0.22em] mb-2 uppercase">
+              Simple Steps. Big Convenience.
+            </h6>
+            <h2 className="text-[30px] lg:text-[34px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-tight">
+              How It Works
+            </h2>
+          </div>
+
+          <div className="flex flex-row items-center justify-between w-full gap-6 lg:gap-10">
+            {/* The 4 Grids / Steps */}
+            <div className="flex flex-row items-center justify-between w-[68%] xl:w-[70%] gap-3 lg:gap-4 relative z-10">
+              {[
+                { num: "01", title: "Book Your Service", desc: "Choose your service and preferred time.", icon: CalendarDays, active: true },
+                { num: "02", title: "We Come to You", desc: "Our team reaches your location on time.", icon: MapPin },
+                { num: "03", title: "Service & Check", desc: "Expert service with genuine parts.", icon: Wrench },
+                { num: "04", title: "Back on the Road", desc: "Your car is ready, we deliver it to you.", icon: CarFront },
+              ].map((step, idx) => (
+                <div key={idx} className="relative flex flex-col items-start w-full flex-1 bg-[#FFF4E5] border border-[#FF7A00]/20 p-3 lg:p-4 rounded-[14px] transition-transform duration-300 hover:-translate-y-1">
+                  <div className={`mb-3 lg:mb-4 rounded-full flex items-center justify-center ${step.active ? 'p-[3px] lg:p-[4px] border-[1.5px] border-[#FF7A00]/60 -ml-[3px] lg:-ml-[4px]' : 'p-[3px] lg:p-[4px] border-[1.5px] border-transparent'}`}>
+                    <div className="w-9 h-9 lg:w-11 lg:h-11 bg-white rounded-full flex items-center justify-center shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+                      <step.icon className={`w-3.5 h-3.5 lg:w-[18px] lg:h-[18px] ${step.active ? 'text-[#1A1A1A]' : 'text-[#475569]'}`} strokeWidth={2.2} />
+                    </div>
+                  </div>
+                  {idx !== 3 && (
+                    <div className="block absolute top-[40%] -right-2 lg:-right-3 translate-x-full -translate-y-1/2 z-20">
+                      <ArrowRight className="w-3 h-3 lg:w-4 lg:h-4 text-[#FF7A00] opacity-80" strokeWidth={3} />
+                    </div>
+                  )}
+                  <div className="text-[9.5px] lg:text-[10.5px] font-bold text-[#475569] mb-0.5">{step.num}</div>
+                  <div className="text-[10.5px] lg:text-[11.5px] font-bold text-[#1A1A1A] mb-0.5 leading-tight pr-1">{step.title}</div>
+                  <p className="text-[8.5px] lg:text-[10px] text-[#64748B] leading-[1.3] pr-1">
+                    {step.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Van Image */}
             <div className="w-[31%] xl:w-[35%] flex justify-end flex-shrink-0 relative">
               <img
                 src="/4th section.png"
@@ -678,7 +712,6 @@ export default function Home() {
                 className="w-[100%] max-w-[400px] object-contain md:-mr-4 xl:translate-x-[5%] mix-blend-multiply [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] transition-transform duration-1000 hover:scale-[1.03]"
               />
             </div>
-
           </div>
         </div>
       </section>
@@ -751,18 +784,18 @@ export default function Home() {
         <div className="w-full max-w-[1300px] grid grid-cols-1 md:grid-cols-3 items-center gap-10 md:gap-4 lg:gap-10 relative z-10 mx-auto">
 
           {/* Column 1: Typography & CTA */}
-          <div className="flex flex-col items-start md:col-span-1 z-20 md:translate-x-12 lg:translate-x-[120px] xl:translate-x-[180px]">
-            <span className="text-[11px] sm:text-[12px] uppercase font-extrabold tracking-[0.25em] text-gray-400 mb-3 ml-1">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-span-1 z-20 md:translate-x-12 lg:translate-x-[120px] xl:translate-x-[180px] order-1 md:order-1 mt-6 md:mt-0">
+            <span className="text-[11px] sm:text-[12px] uppercase font-extrabold tracking-[0.25em] text-gray-400 mb-3">
               OUR PROMISE
             </span>
             <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-extrabold leading-[1.05] tracking-tight mb-4">
               <span className="text-[#1A1A1A] block">Quality Service.</span>
               <span className="text-[#FF7A00] block mt-1">Every Time.</span>
             </h2>
-            <p className="text-[13px] sm:text-[14px] lg:text-[15px] font-medium text-[#475569] leading-relaxed mb-8 max-w-[85%]">
+            <p className="text-[13px] sm:text-[14px] lg:text-[15px] font-medium text-[#475569] leading-relaxed mb-8 max-w-[90%] md:max-w-[85%]">
               Your car deserves the best. And we&apos;re here to deliver it — at your doorstep.
             </p>
-            <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="relative overflow-hidden bg-gradient-to-r from-[#FF512F] to-[#F09819] px-5 py-2.5 rounded-full shadow-[0_8px_20px_rgba(255,122,0,0.2)] flex items-center justify-center group transition-transform hover:scale-[1.02]">
+            <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="relative overflow-hidden bg-gradient-to-r from-[#FF512F] to-[#F09819] px-6 py-3 md:px-5 md:py-2.5 rounded-full shadow-[0_8px_20px_rgba(255,122,0,0.2)] flex items-center justify-center group transition-transform hover:scale-[1.02]">
               <span className="relative z-10 text-white font-bold text-[13px] flex items-center gap-1.5 tracking-wide">
                 Book Your Service
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -772,7 +805,7 @@ export default function Home() {
           </div>
 
           {/* Column 2: Central Featured Car Graphic */}
-          <div className="flex justify-center md:col-span-1 relative z-10 w-full h-[300px] md:h-[380px] lg:h-[400px]">
+          <div className="flex justify-center md:col-span-1 relative z-10 w-full h-[300px] md:h-[380px] lg:h-[400px] order-3 md:order-2 mt-4 md:mt-0">
             {/* The bounding box for the top-down car asset */}
             <img
               src="/6th section.png"
@@ -782,14 +815,14 @@ export default function Home() {
           </div>
 
           {/* Column 3: Feature Pills List */}
-          <div className="flex flex-col gap-3 md:gap-5 items-start md:items-end md:col-span-1 z-20 md:-translate-x-24 lg:-translate-x-[250px] xl:-translate-x-[350px]">
+          <div className="flex flex-col gap-3 md:gap-5 items-start md:items-end md:col-span-1 z-20 md:-translate-x-24 lg:-translate-x-[250px] xl:-translate-x-[350px] order-2 md:order-3 w-full">
             {[
               { title: '100% Genuine Parts', icon: ShieldCheck },
               { title: 'Trained Technicians', icon: UserCheck },
               { title: 'On-Time Delivery', icon: Clock },
               { title: 'Affordable Pricing', icon: Tag },
             ].map((feature, idx) => (
-              <div key={idx} className="flex items-center gap-3 md:gap-4 bg-white pl-3 pr-4 md:pr-5 py-2.5 md:py-3 rounded-[14px] shadow-[0_10px_25px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_15px_30px_rgba(255,122,0,0.06)] transition-all flex-row md:flex-row-reverse w-[90%] md:w-auto">
+              <div key={idx} className="flex items-center gap-3 md:gap-4 bg-white pl-3 pr-4 md:pr-5 py-2.5 md:py-3 rounded-[14px] shadow-[0_10px_25px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_15px_30px_rgba(255,122,0,0.06)] transition-all flex-row md:flex-row-reverse w-full sm:w-[90%] md:w-auto">
                 {/* Feature Text */}
                 <span className="text-[12px] lg:text-[13px] font-bold text-[#1A1A1A] md:w-[125px] lg:w-[140px] text-left md:text-right leading-tight whitespace-nowrap md:whitespace-normal">
                   {feature.title}
@@ -815,7 +848,7 @@ export default function Home() {
           <img
             src="/7th section.png"
             alt="Sunset Driving Car"
-            className="w-full h-full object-cover object-center md:object-[center_30%]"
+            className="w-full h-full object-cover object-[85%_center] md:object-[center_30%]"
           />
           {/* Intense gradient crushing the left side to pure darkness for text accessibility */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#111111] from-10% md:from-20% via-[#111111]/80 via-40% md:via-[45%] to-transparent w-full md:w-[85%]" />
@@ -848,27 +881,28 @@ export default function Home() {
           {/* Column 1: Branding & Social (Left Anchor) */}
           <div className="flex flex-col items-start pr-2 md:pr-4 md:w-[25%] lg:w-[30%] shrink-0">
             <a href="/" className="flex items-center gap-2 mb-4 group cursor-pointer">
-              <div className="bg-[#FF7A00] p-1.5 rounded-md">
-                <Wrench className="w-4 h-4 text-white transform group-hover:rotate-12 transition-transform duration-300" strokeWidth={2.5} />
-              </div>
-              <span className="text-white text-[18px] font-black tracking-wide group-hover:text-gray-200 transition-colors">AutoTricks</span>
+              <img src="/autotricks logo.png" alt="AutoTricks" className="h-[75px] md:h-[90px] xl:h-[105px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
             </a>
             <p className="text-[12px] font-medium text-gray-500 mb-6 tracking-wide">
               Car Service. At Your Doorstep.
             </p>
             <div className="flex items-center gap-3">
-              {[InstagramIcon, FacebookIcon, YoutubeIcon].map((SocialIcon, idx) => (
-                <div key={idx} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 hover:border-white/20 transition-colors">
-                  <SocialIcon className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                </div>
+              {[
+                { Icon: InstagramIcon, href: 'https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5' },
+                { Icon: FacebookIcon, href: '#' },
+                { Icon: YoutubeIcon, href: '#' }
+              ].map((social, idx) => (
+                <a key={idx} href={social.href} target={social.href !== '#' ? "_blank" : undefined} rel={social.href !== '#' ? "noopener noreferrer" : undefined} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 hover:border-white/20 transition-colors">
+                  <social.Icon className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                </a>
               ))}
             </div>
           </div>
 
           {/* Right Side Group: Links & Contact */}
-          <div className="w-full md:w-auto grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-16 xl:gap-20 md:ml-auto">
+          <div className="w-full md:w-auto grid grid-cols-2 sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-16 xl:gap-20 md:ml-auto">
             {/* Column 2: Quick Links */}
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start order-2 sm:order-1">
               <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Quick Links</h4>
               <ul className="flex flex-col gap-3.5">
                 {[
@@ -888,7 +922,7 @@ export default function Home() {
             </div>
 
             {/* Column 3: Our Services */}
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start order-1 sm:order-2">
               <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Our Services</h4>
               <ul className="flex flex-col gap-3.5">
                 {['Periodic Service', 'Engine Diagnostics', 'Brake Service', 'AC Service', 'General Repairs'].map((service, idx) => (
@@ -902,16 +936,16 @@ export default function Home() {
             </div>
 
             {/* Column 4: Contact Us */}
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start col-span-2 sm:col-span-1 pt-2 sm:pt-0 order-3 md:order-3">
               <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Contact Us</h4>
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                  <span className="text-[12px] font-medium text-gray-400">+91 98765 43210</span>
+                  <span className="text-[12px] font-medium text-gray-400">+91 87543 99388</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                  <span className="text-[12px] font-medium text-gray-400">care@autotricks.in</span>
+                  <span className="text-[12px] font-medium text-gray-400">autotricks08@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
@@ -934,10 +968,10 @@ export default function Home() {
 
       {/* Floating Social Icons */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group border border-gray-100 relative">
+        <a href="https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group border border-gray-100 relative">
           <InstagramIconExact className="w-4 h-4 text-[#E1306C]" />
         </a>
-        <a href="https://wa.me/916383629997?text=Hi%20AutoTricks,%20I%20would%20like%20to%20book%20a%20service." target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group relative">
+        <a href="https://wa.me/918754399388?text=Hi%20AutoTricks,%20I%20would%20like%20to%20book%20a%20service." target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group relative">
           <WhatsAppIconExact className="w-4 h-4 text-white" />
         </a>
       </div>
