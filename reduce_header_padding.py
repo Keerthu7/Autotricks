@@ -1,15 +1,11 @@
-import os
-files = ['app/page.tsx', 'app/about/page.tsx', 'app/services/page.tsx']
-for path in files:
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            c = f.read()
-            
-        # In page.tsx:
-        c = c.replace('px-6 md:px-10 py-3 max-w-[1400px]', 'px-6 md:px-10 py-1.5 max-w-[1400px]')
-        # In about / services:
-        c = c.replace('px-10 py-3 max-w-[1400px]', 'px-10 py-1.5 max-w-[1400px]')
-        
-        with open(path, 'w', encoding='utf-8') as f:
-            f.write(c)
-        print('Updated padding in', path)
+with open('app/page.tsx', 'r') as f:
+    c = f.read()
+
+# Current header class has py-3 md:py-4
+# Let's change it to have asymmetrical padding: pt-3 pb-1 md:pt-4 md:pb-1
+c = c.replace('px-6 md:px-10 py-3 md:py-4 max-w-[1400px]', 'px-6 md:px-10 pt-3 pb-1 md:pt-4 md:pb-1 max-w-[1400px]')
+
+with open('app/page.tsx', 'w') as f:
+    f.write(c)
+
+print("Header Bottom Space Reduced")

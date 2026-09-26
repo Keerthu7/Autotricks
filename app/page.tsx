@@ -75,16 +75,16 @@ const HeroScrollAnimation = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/30 to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/80 via-[#111111]/30 to-transparent z-10 pointer-events-none" />
           </div>
-          <main className="relative z-20 flex-1 flex flex-col justify-center px-6 w-full mt-24 mb-10 pointer-events-none">
+          <main className="relative z-20 flex-1 flex flex-col justify-center px-6 w-full mt-36 mb-4 pointer-events-none">
             <div ref={mobileTextRef} className="w-full pointer-events-auto" style={{ opacity: 'calc(var(--hero-scroll-p, 0) * 2.5)', transform: 'translateY(calc(40px - 40px * var(--hero-scroll-p, 0)))' }}>
-              <p className="text-gray-300/80 text-[9px] font-semibold tracking-[0.25em] mb-3 uppercase">
+              <p className="text-gray-300/80 text-[9px] font-semibold tracking-[0.25em] mb-3 uppercase md:text-[15px]">
                 Premium car service at your doorstep
               </p>
-              <h1 className="text-3xl font-bold leading-[1.1] mb-4">
+              <h1 className="text-3xl md:text-[42px] font-bold leading-[1.1] mb-4">
                 We Keep Your <br />
                 <span className="text-[#FF7A00]">Car Moving</span>
               </h1>
-              <p className="text-[#d4d4d8] text-xs max-w-[24rem] leading-relaxed mb-6">
+              <p className="text-[#d4d4d8] text-xs md:text-[16px] max-w-[24rem] leading-relaxed mb-6">
                 Professional car service, right at your doorstep.<br />
                 No workshop visits. No hassle. Just smooth rides.
               </p>
@@ -93,27 +93,27 @@ const HeroScrollAnimation = () => {
                 <div className="flex items-center gap-2">
                   <UserCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <div>
-                    <h3 className="font-semibold text-[11px]">Expert Technicians</h3>
-                    <p className="text-[9px] text-[#A1A1AA]">Certified & Trusted</p>
+                    <h3 className="font-semibold text-[11px] md:text-[17px]">Expert Technicians</h3>
+                    <p className="text-[9px] text-[#A1A1AA] md:text-[15px]">Certified & Trusted</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <div>
-                    <h3 className="font-semibold text-[11px]">Quality Service</h3>
-                    <p className="text-[9px] text-[#A1A1AA]">Genuine Parts</p>
+                    <h3 className="font-semibold text-[11px] md:text-[17px]">Quality Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA] md:text-[15px]">Genuine Parts</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <div>
-                    <h3 className="font-semibold text-[11px]">Doorstep Service</h3>
-                    <p className="text-[9px] text-[#A1A1AA]">Anywhere in Your City</p>
+                    <h3 className="font-semibold text-[11px] md:text-[17px]">Doorstep Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA] md:text-[15px]">Anywhere in Your City</p>
                   </div>
                 </div>
               </div>
 
-              <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-6 py-2.5 rounded-full text-[11px] font-bold flex items-center w-max gap-1.5 transition-all shadow-[0_4px_20px_rgba(255,122,0,0.25)]">
+              <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-6 py-2.5 rounded-full text-[11px] font-bold flex items-center w-max gap-1.5 transition-all shadow-[0_4px_20px_rgba(255,122,0,0.25)] md:text-[17px]">
                 Book Your Service
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
@@ -139,15 +139,15 @@ const HeroScrollAnimation = () => {
           </div>
 
           <main className="relative z-20 flex-1 flex flex-col justify-center max-w-[1400px] mx-auto px-10 w-full mb-10 pointer-events-none">
-            <div ref={textRef} className="max-w-2xl ml-10 mt-4 pointer-events-auto" style={{ opacity: 'calc(var(--hero-scroll-p, 0) * 2)', transform: 'translateY(calc(30px - 30px * var(--hero-scroll-p, 0)))' }}>
-              <p className="text-gray-300/80 text-[10px] font-semibold tracking-[0.25em] mb-3 uppercase">
+            <div ref={textRef} className="max-w-2xl ml-10 mt-32 pointer-events-auto" style={{ opacity: 'calc(var(--hero-scroll-p, 0) * 2)', transform: 'translateY(calc(30px - 30px * var(--hero-scroll-p, 0)))' }}>
+              <p className="text-gray-300/80 text-[10px] font-semibold tracking-[0.25em] mb-3 uppercase md:text-[16px]">
                 Premium car service at your doorstep
               </p>
-              <h1 className="text-4xl font-bold leading-[1.1] mb-4">
+              <h1 className="text-4xl md:text-[54px] font-bold leading-[1.1] mb-4">
                 We Keep Your <br />
                 <span className="text-[#FF7A00]">Car Moving</span>
               </h1>
-              <p className="text-[#d4d4d8] text-[12px] max-w-[24rem] leading-relaxed mb-6">
+              <p className="text-[#d4d4d8] text-[12px] max-w-[24rem] leading-relaxed mb-6 md:text-[18px]">
                 Professional car service, right at your doorstep.<br />
                 No workshop visits. No hassle. Just smooth rides.
               </p>
@@ -155,26 +155,26 @@ const HeroScrollAnimation = () => {
                 <div className="flex items-center gap-2">
                   <UserCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <div>
-                    <h3 className="font-semibold text-[10px]">Expert Technicians</h3>
-                    <p className="text-[9px] text-[#A1A1AA]">Certified & Trusted</p>
+                    <h3 className="font-semibold text-[10px] md:text-[16px]">Expert Technicians</h3>
+                    <p className="text-[9px] text-[#A1A1AA] md:text-[15px]">Certified & Trusted</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 border-l border-white/10 pl-5">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <div>
-                    <h3 className="font-semibold text-[10px]">Quality Service</h3>
-                    <p className="text-[9px] text-[#A1A1AA]">Genuine Parts</p>
+                    <h3 className="font-semibold text-[10px] md:text-[16px]">Quality Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA] md:text-[15px]">Genuine Parts</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 border-l border-white/10 pl-5">
                   <MapPin className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <div>
-                    <h3 className="font-semibold text-[10px]">Doorstep Service</h3>
-                    <p className="text-[9px] text-[#A1A1AA]">Anywhere in Your City</p>
+                    <h3 className="font-semibold text-[10px] md:text-[16px]">Doorstep Service</h3>
+                    <p className="text-[9px] text-[#A1A1AA] md:text-[15px]">Anywhere in Your City</p>
                   </div>
                 </div>
               </div>
-              <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-5 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_24px_rgba(255,122,0,0.3)]">
+              <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="bg-gradient-to-r from-[#FF7A00] to-[#E65C00] hover:from-[#e06b00] hover:to-[#cc5200] text-white px-5 py-2 rounded-full text-xs md:text-[16px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_24px_rgba(255,122,0,0.3)]">
                 Book Your Service
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
@@ -235,7 +235,7 @@ const Section3ScrollAnimation = () => {
 
       const hRatio = width / img.width;
       const vRatio = height / img.height;
-      const ratio = Math.max(hRatio, vRatio) * 0.55;
+      const ratio = Math.max(hRatio, vRatio) * 0.50;
 
       // We want to shift the image rendering to the right on larger screens,
       // matching the original layout where the car was placed on the right.
@@ -244,9 +244,9 @@ const Section3ScrollAnimation = () => {
 
       if (width >= 1024) { // lg screens
         // Moved a bit more to the right as requested
-        centerShift_x += width * 0.35;
+        centerShift_x += width * 0.26;
       } else if (width >= 768) { // md screens
-        centerShift_x += width * 0.25;
+        centerShift_x += width * 0.26;
       }
 
       const drawnWidth = img.width * ratio;
@@ -345,7 +345,7 @@ const Section3ScrollAnimation = () => {
   }, [images]);
 
   return (
-    <section id="why-us" ref={containerRef} className="relative w-full md:h-[150vh] bg-[#13171F]">
+    <section id="why-us" ref={containerRef} className="relative w-full md:h-[180vh] bg-[#13171F]">
       <div className="md:sticky top-0 md:h-[100dvh] py-12 md:py-0 w-full flex items-center bg-[#13171F] overflow-hidden">
         {/* Background Image Setup */}
         <div className="absolute inset-0 z-0 bg-[#13171F]">
@@ -363,13 +363,13 @@ const Section3ScrollAnimation = () => {
         {/* Overlay Floating Badges & Markers */}
         <div ref={markersRef} className="absolute inset-0 z-30 hidden sm:block max-w-[1200px] mx-auto pointer-events-none transition-opacity duration-700">
           {/* Container tailored for the rightward-shifted car */}
-          <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[45%] h-[50vh] scale-[0.8] lg:scale-90 xl:scale-100" style={{ opacity: 'calc(var(--scroll-p, 0) * 1.5)' }}>
+          <div className="absolute right-[4%] top-1/2 -translate-y-1/2 w-[45%] h-[50vh] scale-[0.75] lg:scale-[0.85] xl:scale-90" style={{ opacity: 'calc(var(--scroll-p, 0) * 1.5)' }}>
 
             {/* Engine Check Badge */}
             <div className="absolute top-[8%] left-[12%] z-20">
               <div className="relative flex items-center gap-2 border border-blue-100/10 bg-[#13171F]/90 px-3 py-1.5 rounded-full shadow-xl w-max z-20" style={{ transform: 'scale(calc(0.7 + (var(--scroll-p, 0) * 0.3)))' }}>
                 <Activity className="w-3 h-3 text-[#FF7A00]" />
-                <span className="text-white text-[10px] font-semibold tracking-[0.03em]">Engine Check</span>
+                <span className="text-white text-[10px] font-semibold tracking-[0.03em] md:text-[16px]">Engine Check</span>
               </div>
               <div className="absolute top-1/2 left-[30%] border-l-[1.5px] border-b-[1.5px] border-[#FF7A00]/70 rounded-bl-xl origin-top-right transition-all" style={{ width: 'calc(10px + 50px * var(--scroll-p, 0))', height: 'calc(10px + 50px * var(--scroll-p, 0))' }}>
                 <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-[#13171F] border-[1.5px] border-[#FF7A00] rounded-full shadow-[0_0_8px_#FF7A00]" />
@@ -380,7 +380,7 @@ const Section3ScrollAnimation = () => {
             <div className="absolute top-[3%] right-[22%] z-20">
               <div className="relative flex items-center gap-2 border border-blue-100/10 bg-[#13171F]/90 px-3 py-1.5 rounded-full shadow-xl w-max z-20" style={{ transform: 'scale(calc(0.7 + (var(--scroll-p, 0) * 0.3)))' }}>
                 <Wind className="w-3 h-3 text-[#FF7A00]" />
-                <span className="text-white text-[10px] font-semibold tracking-[0.03em]">AC Service</span>
+                <span className="text-white text-[10px] font-semibold tracking-[0.03em] md:text-[16px]">AC Service</span>
               </div>
               <div className="absolute top-1/2 right-[30%] border-r-[1.5px] border-b-[1.5px] border-[#FF7A00]/70 rounded-br-xl origin-top-left transition-all" style={{ width: 'calc(10px + 45px * var(--scroll-p, 0))', height: 'calc(10px + 40px * var(--scroll-p, 0))' }}>
                 <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-[#13171F] border-[1.5px] border-[#FF7A00] rounded-full shadow-[0_0_8px_#FF7A00]" />
@@ -394,7 +394,7 @@ const Section3ScrollAnimation = () => {
               </div>
               <div className="relative flex items-center gap-2 border border-blue-100/10 bg-[#13171F]/90 px-3 py-1.5 mt-2 rounded-full shadow-xl w-max z-20" style={{ transform: 'scale(calc(0.7 + (var(--scroll-p, 0) * 0.3)))' }}>
                 <Disc className="w-3 h-3 text-[#FF7A00]" />
-                <span className="text-white text-[10px] font-semibold tracking-[0.03em]">Brake Service</span>
+                <span className="text-white text-[10px] font-semibold tracking-[0.03em] md:text-[16px]">Brake Service</span>
               </div>
             </div>
 
@@ -405,7 +405,7 @@ const Section3ScrollAnimation = () => {
               </div>
               <div className="relative flex items-center gap-2 border border-blue-100/10 bg-[#13171F]/90 px-3 py-1.5 mt-2 rounded-full shadow-xl w-max z-20" style={{ transform: 'scale(calc(0.7 + (var(--scroll-p, 0) * 0.3)))' }}>
                 <BatteryCharging className="w-3 h-3 text-[#FF7A00]" />
-                <span className="text-white text-[10px] font-semibold tracking-[0.03em]">Battery Check</span>
+                <span className="text-white text-[10px] font-semibold tracking-[0.03em] md:text-[16px]">Battery Check</span>
               </div>
             </div>
 
@@ -413,16 +413,16 @@ const Section3ScrollAnimation = () => {
         </div>
 
         {/* Content on Left */}
-        <div className="relative z-20 w-full max-w-[1150px] mx-auto px-6 sm:px-10 md:px-16 flex items-center">
+        <div className="relative z-20 w-full max-w-[1250px] mx-auto px-6 sm:px-10 md:px-16 flex items-center">
           <div className="max-w-sm md:max-w-md lg:max-w-lg md:pt-4">
-            <h6 className="text-[#a1a1aa] text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.15em] mb-2.5 uppercase">
+            <h6 className="text-[#a1a1aa] text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.15em] mb-2.5 uppercase md:text-[14.5px]">
               The Auto Tricks Advantage
             </h6>
-            <h2 className="text-[26px] sm:text-[32px] lg:text-[36px] font-extrabold leading-[1.1] mb-4 text-white tracking-tight">
+            <h2 className="text-[26px] sm:text-[32px] lg:text-[42px] font-extrabold leading-[1.1] mb-4 text-white tracking-tight">
               Advanced Care. <br />
               <span className="text-[#FF7A00]">Lasting Performance.</span>
             </h2>
-            <p className="text-[#d4d4d8] text-[11px] sm:text-[12px] leading-relaxed mb-8 max-w-[90%] font-medium">
+            <p className="text-[#d4d4d8] text-[11px] sm:text-[12px] leading-relaxed mb-8 max-w-[90%] font-medium md:text-[18px]">
               We use advanced tools, genuine parts and expert technicians to give your car the care it deserves.
             </p>
 
@@ -441,7 +441,7 @@ const Section3ScrollAnimation = () => {
                       <path d="M8 12l3 3 5-5" stroke="#FF7A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <span className="text-gray-300 text-[11px] sm:text-[12px] font-semibold">{item}</span>
+                  <span className="text-gray-300 text-[11px] sm:text-[12px] font-semibold md:text-[18px]">{item}</span>
                 </li>
               ))}
             </ul>
@@ -468,12 +468,12 @@ export default function Home() {
     <div className="bg-[#FFFFFF] font-sans w-full min-h-screen flex flex-col">
       {/* Common Header Wrapper */}
       <div className={`w-full flex justify-center fixed top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[#111111]/80 backdrop-blur-lg border-b border-white/5 shadow-sm' : 'bg-transparent border-b border-transparent'}`}>
-        <header className="relative z-20 flex-shrink-0 flex items-center justify-between px-6 md:px-10 py-0 max-w-[1400px] mx-auto w-full">
-          <a href="/" className="flex items-center gap-2 ml-0 md:ml-24 group">
-            <img src="/autotricks logo.png" alt="AutoTricks" className="h-12 md:h-[50px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
+        <header className="relative z-20 flex-shrink-0 flex items-center justify-between px-6 md:px-10 pt-3 pb-1 md:pt-4 md:pb-1 max-w-[1150px] mx-auto w-full">
+          <a href="/" className="flex items-center gap-2 ml-0 md:ml-4 group">
+            <img src="/autotricks logo.png" alt="AutoTricks" className="h-14 md:h-[65px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
           </a>
 
-          <nav className="hidden md:flex gap-10 text-xs font-medium text-gray-300">
+          <nav className="hidden md:flex gap-12 text-xs md:text-[17px] font-medium text-gray-300">
             <a href="#home" className="text-[#FF7A00] pb-1 border-b-2 border-[#FF7A00]">Home</a>
             <a href="#services" className="hover:text-white transition-colors">Services</a>
             <a href="#why-us" className="hover:text-white transition-colors">Why Us</a>
@@ -481,7 +481,7 @@ export default function Home() {
             <a href="/about" className="hover:text-white transition-colors">About</a>
           </nav>
 
-          <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="hidden md:inline-block bg-[#FF7A00] hover:bg-[#e06b00] text-white px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors mr-2 md:mr-10">
+          <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="hidden md:inline-block bg-[#FF7A00] hover:bg-[#e06b00] text-white px-4 py-1.5 md:px-6 md:py-2 rounded-full text-[11px] font-bold transition-colors mr-2 md:mr-4 md:text-[14.5px]">
             Book Service
           </button>
 
@@ -490,58 +490,59 @@ export default function Home() {
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
           </button>
         </header>
-
-        {/* Mobile Menu Overlay */}
-
-        {/* Mobile Menu Backdrop */}
-        <div
-          onClick={() => setIsMobileMenuOpen(false)}
-          className={`md:hidden fixed inset-0 bg-black/60 z-[55] transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        />
-
-        {/* Mobile Menu Sidebar */}
-        <div className={`md:hidden fixed inset-y-0 right-0 w-[75vw] sm:w-[300px] bg-[#111111] z-[60] flex flex-col pt-24 px-8 transition-transform duration-300 ease-in-out border-l border-white/10 shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-5 right-6 text-white p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
-
-          <div className="flex items-center gap-2 mb-10">
-            <img src="/autotricks logo.png" alt="AutoTricks" className="h-10 w-auto object-contain" />
-          </div>
-
-          <nav className="flex flex-col gap-6 text-lg font-semibold text-white/90">
-            <a href="/#home" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Home</a>
-            <a href="/#services" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Services</a>
-            <a href="/#why-us" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Why Us</a>
-            <a href="/#how-it-works" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">How It Works</a>
-            <a href="/about" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">About</a>
-          </nav>
-
-          <button onClick={() => { setIsMobileMenuOpen(false); if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="mt-8 bg-[#FF7A00] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_4px_20px_rgba(255,122,0,0.3)] w-full text-center">
-            Book Service Now
-          </button>
-        </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+
+      {/* Mobile Menu Backdrop */}
+      <div
+        onClick={() => setIsMobileMenuOpen(false)}
+        className={`md:hidden fixed inset-0 bg-black/60 z-[55] transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      />
+
+      {/* Mobile Menu Sidebar */}
+      <div className={`md:hidden fixed inset-y-0 right-0 w-[75vw] sm:w-[300px] bg-[#111111] z-[60] flex flex-col pt-24 px-8 transition-transform duration-300 ease-in-out border-l border-white/10 shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-5 right-6 text-white p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <div className="flex items-center gap-2 mb-10">
+          <img src="/autotricks logo.png" alt="AutoTricks" className="h-10 w-auto object-contain" />
+        </div>
+
+        <nav className="flex flex-col gap-6 text-lg md:text-[24px] font-semibold text-white/90">
+          <a href="/#home" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Home</a>
+          <a href="/#services" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Services</a>
+          <a href="/#why-us" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">Why Us</a>
+          <a href="/#how-it-works" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">How It Works</a>
+          <a href="/about" onClick={() => setIsMobileMenuOpen(false)} className="border-b border-white/10 pb-3">About</a>
+        </nav>
+
+        <button onClick={() => { setIsMobileMenuOpen(false); if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="mt-8 bg-[#FF7A00] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_4px_20px_rgba(255,122,0,0.3)] w-full text-center">
+          Book Service Now
+        </button>
+      </div>
+
 
       <HeroScrollAnimation />
 
       {/* Services Section */}
-      <section id="services" className="py-12 md:py-16 px-6 sm:px-10 md:px-16 w-full flex justify-center bg-white flex-1">
+      <section id="services" className="py-12 md:py-24 px-6 sm:px-10 md:px-16 w-full flex justify-center bg-white flex-1">
         <div className="w-full max-w-[1150px] flex flex-col md:flex-row items-center md:items-start justify-between gap-12 lg:gap-20">
 
           {/* Left Text Block */}
           <div className="w-full md:w-[35%] lg:w-[33%] shrink-0 md:pt-3">
-            <h6 className="text-[#1A1A1A] text-[8.5px] sm:text-[9.5px] font-extrabold tracking-[0.15em] mb-3 uppercase">
+            <h6 className="text-[#1A1A1A] text-[8.5px] sm:text-[9.5px] font-extrabold tracking-[0.15em] mb-3 uppercase md:text-[15.5px]">
               Our Services
             </h6>
-            <h2 className="text-[28px] sm:text-[32px] lg:text-[34px] font-extrabold leading-[1.1] mb-4 text-[#1A1A1A] tracking-tight">
-              Complete Car Care <br />
+            <h2 className="text-[28px] sm:text-[32px] lg:text-[40px] font-extrabold leading-[1.1] mb-4 text-[#1A1A1A] tracking-wide">
+              <span className="whitespace-nowrap">Complete Car Care</span> <br />
               <span className="text-[#FF7A00]">Under One Roof</span>
             </h2>
-            <p className="text-gray-500 text-[11.5px] sm:text-[12px] leading-relaxed mb-6 max-w-[95%] font-medium">
+            <p className="text-gray-500 text-[11.5px] sm:text-[12px] leading-relaxed mb-6 max-w-full font-medium md:text-[18px]">
               From routine maintenance to advanced repairs, we handle it all — at your doorstep.
             </p>
-            <a href="/services" className="inline-flex items-center gap-2 text-[#FF7A00] font-bold text-[11.5px] sm:text-[12px] hover:gap-3 transition-all duration-300">
+            <a href="/services" className="inline-flex items-center gap-2 text-[#FF7A00] font-bold text-[11.5px] sm:text-[12px] hover:gap-3 transition-all duration-300 md:text-[18px]">
               Explore All Services <ArrowRight className="w-3.5 h-3.5 text-[#FF7A00]" />
             </a>
           </div>
@@ -555,8 +556,8 @@ export default function Home() {
                 <Wrench className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] text-[#1A1A1A]" strokeWidth={2} />
                 <span className="absolute -top-0.5 -right-0.5 w-[7px] h-[7px] sm:w-2 sm:h-2 bg-[#FF7A00] rounded-full border-[1.5px] border-[#FFF4E5]"></span>
               </div>
-              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-0.5 leading-tight">Periodic Service</h3>
-              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-tight">Keep your car in top shape</p>
+              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-2 leading-normal tracking-wide md:text-[18px]">Periodic Service</h3>
+              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-normal tracking-wide md:text-[15.5px]">Keep your car in top shape</p>
             </div>
 
             {/* Card 2 */}
@@ -565,8 +566,8 @@ export default function Home() {
                 <Activity className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] text-[#1A1A1A]" strokeWidth={2} />
                 <span className="absolute -top-0.5 -right-0.5 w-[7px] h-[7px] sm:w-2 sm:h-2 bg-[#FF7A00] rounded-full border-[1.5px] border-[#FFF4E5]"></span>
               </div>
-              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-0.5 leading-tight">Engine Diagnostics</h3>
-              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-tight">Find issues early</p>
+              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-2 leading-normal tracking-wide md:text-[18px]">Engine Diagnostics</h3>
+              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-normal tracking-wide md:text-[15.5px]">Find issues early</p>
             </div>
 
             {/* Card 3 */}
@@ -575,8 +576,8 @@ export default function Home() {
                 <Disc className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] text-[#1A1A1A]" strokeWidth={2} />
                 <span className="absolute -top-0.5 -right-0.5 w-[7px] h-[7px] sm:w-2 sm:h-2 bg-[#FF7A00] rounded-full border-[1.5px] border-[#FFF4E5]"></span>
               </div>
-              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-0.5 leading-tight">Brake Service</h3>
-              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-tight">Safe stops, every time</p>
+              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-2 leading-normal tracking-wide md:text-[18px]">Brake Service</h3>
+              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-normal tracking-wide md:text-[15.5px]">Safe stops, every time</p>
             </div>
 
             {/* Card 4 */}
@@ -585,8 +586,8 @@ export default function Home() {
                 <Wind className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] text-[#1A1A1A]" strokeWidth={2} />
                 <span className="absolute -top-0.5 -right-0.5 w-[7px] h-[7px] sm:w-2 sm:h-2 bg-[#FF7A00] rounded-full border-[1.5px] border-[#FFF4E5]"></span>
               </div>
-              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-0.5 leading-tight">AC Service</h3>
-              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-tight">Beat the heat</p>
+              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-2 leading-normal tracking-wide md:text-[18px]">AC Service</h3>
+              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-normal tracking-wide md:text-[15.5px]">Beat the heat</p>
             </div>
 
             {/* Card 5 */}
@@ -595,8 +596,8 @@ export default function Home() {
                 <BatteryCharging className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] text-[#1A1A1A]" strokeWidth={2} />
                 <span className="absolute -top-0.5 -right-0.5 w-[7px] h-[7px] sm:w-2 sm:h-2 bg-[#FF7A00] rounded-full border-[1.5px] border-[#FFF4E5]"></span>
               </div>
-              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-0.5 leading-tight">Battery Check</h3>
-              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-tight">Reliable power</p>
+              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-2 leading-normal tracking-wide md:text-[18px]">Battery Check</h3>
+              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-normal tracking-wide md:text-[15.5px]">Reliable power</p>
             </div>
 
             {/* Card 6 */}
@@ -605,8 +606,8 @@ export default function Home() {
                 <Settings className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] text-[#1A1A1A]" strokeWidth={2} />
                 <span className="absolute -top-0.5 -right-0.5 w-[7px] h-[7px] sm:w-2 sm:h-2 bg-[#FF7A00] rounded-full border-[1.5px] border-[#FFF4E5]"></span>
               </div>
-              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-0.5 leading-tight">General Repairs</h3>
-              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-tight">All major & minor fixes</p>
+              <h3 className="text-[11px] sm:text-[12px] font-bold text-[#1A1A1A] mb-2 leading-normal tracking-wide md:text-[18px]">General Repairs</h3>
+              <p className="text-[8.5px] sm:text-[9.5px] text-gray-500 font-medium leading-normal tracking-wide md:text-[15.5px]">All major & minor fixes</p>
             </div>
 
           </div>
@@ -616,16 +617,16 @@ export default function Home() {
       <Section3ScrollAnimation />
 
       {/* 4th Section - How It Works */}
-      <section id="how-it-works" className="relative w-full py-12 md:py-8 bg-white overflow-hidden flex justify-center px-6 sm:px-10 lg:pl-16 lg:pr-8">
+      <section id="how-it-works" className="relative w-full py-12 md:py-24 bg-white overflow-hidden flex justify-center px-6 sm:px-10 lg:pl-16 lg:pr-8">
 
         {/* ===================== MOBILE VIEW (New Grid Layout) ===================== */}
         <div className="w-full max-w-[1300px] flex flex-col z-10 relative md:hidden">
           {/* Heading */}
           <div className="mb-10 w-full text-center pl-2">
-            <h6 className="text-[#64748B] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            <h6 className="text-[#64748B] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase md:text-[16px]">
               Simple Steps. Big Convenience.
             </h6>
-            <h2 className="text-[28px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-tight">
+            <h2 className="text-[28px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-wide md:text-[34px]">
               How It Works
             </h2>
           </div>
@@ -645,9 +646,9 @@ export default function Home() {
                       <step.icon className={`w-4 h-4 ${step.active ? 'text-[#1A1A1A]' : 'text-[#475569]'}`} strokeWidth={2.2} />
                     </div>
                   </div>
-                  <div className="text-[11px] font-extrabold text-[#94A3B8] mb-1">{step.num}</div>
-                  <div className="text-[13px] font-bold text-[#1A1A1A] mb-1.5 leading-snug pr-2">{step.title}</div>
-                  <p className="text-[11px] text-[#64748B] leading-relaxed">{step.desc}</p>
+                  <div className="text-[11px] font-extrabold text-[#94A3B8] mb-2 md:text-[17px]">{step.num}</div>
+                  <div className="text-[13px] font-bold text-[#1A1A1A] mb-2.5 leading-normal pr-2 tracking-wide md:text-[19px]">{step.title}</div>
+                  <p className="text-[11px] text-[#64748B] leading-[1.6] tracking-wide md:text-[17px]">{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -667,17 +668,17 @@ export default function Home() {
         <div className="w-full max-w-[1300px] hidden md:flex flex-col z-10 w-full lg:w-auto relative">
           {/* Heading */}
           <div className="mb-8 lg:mb-10 w-full pl-2">
-            <h6 className="text-[#64748B] text-[9px] font-bold tracking-[0.22em] mb-2 uppercase">
+            <h6 className="text-[#64748B] text-[9px] font-bold tracking-[0.22em] mb-4 uppercase md:text-[15px]">
               Simple Steps. Big Convenience.
             </h6>
-            <h2 className="text-[30px] lg:text-[34px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-tight">
+            <h2 className="text-[30px] lg:text-[40px] font-extrabold leading-[1.1] text-[#1A1A1A] tracking-wide">
               How It Works
             </h2>
           </div>
 
           <div className="flex flex-row items-center justify-between w-full gap-6 lg:gap-10">
             {/* The 4 Grids / Steps */}
-            <div className="flex flex-row items-center justify-between w-[68%] xl:w-[70%] gap-3 lg:gap-4 relative z-10">
+            <div className="flex flex-row items-stretch justify-between w-[68%] xl:w-[70%] gap-4 lg:gap-6 xl:gap-8 relative z-10">
               {[
                 { num: "01", title: "Book Your Service", desc: "Choose your service and preferred time.", icon: CalendarDays, active: true },
                 { num: "02", title: "We Come to You", desc: "Our team reaches your location on time.", icon: MapPin },
@@ -695,9 +696,9 @@ export default function Home() {
                       <ArrowRight className="w-3 h-3 lg:w-4 lg:h-4 text-[#FF7A00] opacity-80" strokeWidth={3} />
                     </div>
                   )}
-                  <div className="text-[9.5px] lg:text-[10.5px] font-bold text-[#475569] mb-0.5">{step.num}</div>
-                  <div className="text-[10.5px] lg:text-[11.5px] font-bold text-[#1A1A1A] mb-0.5 leading-tight pr-1">{step.title}</div>
-                  <p className="text-[8.5px] lg:text-[10px] text-[#64748B] leading-[1.3] pr-1">
+                  <div className="text-[9.5px] lg:text-[16.5px] font-bold text-[#475569] mb-0.5">{step.num}</div>
+                  <div className="text-[10.5px] lg:text-[17.5px] font-bold text-[#1A1A1A] mb-0.5 leading-tight pr-1 whitespace-nowrap [word-spacing:1.5px] lg:[word-spacing:2.5px]">{step.title}</div>
+                  <p className="text-[8.5px] lg:text-[16px] text-[#64748B] leading-[1.4] pr-1 [word-spacing:1.5px] lg:[word-spacing:2.5px]">
                     {step.desc}
                   </p>
                 </div>
@@ -709,7 +710,7 @@ export default function Home() {
               <img
                 src="/4th section.png"
                 alt="AutoTricks Van"
-                className="w-[100%] max-w-[400px] object-contain md:-mr-4 xl:translate-x-[5%] mix-blend-multiply [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] transition-transform duration-1000 hover:scale-[1.03]"
+                className="w-[100%] max-w-[500px] object-contain md:-mr-4 xl:translate-x-[5%] mix-blend-multiply [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)] transition-transform duration-1000 hover:scale-[1.20] scale-[1.10] transform origin-right"
               />
             </div>
           </div>
@@ -717,7 +718,7 @@ export default function Home() {
       </section>
 
       {/* 5th Section - Doorstep Convenience */}
-      <section className="relative w-full min-h-[450px] lg:min-h-[500px] flex items-center bg-[#13171F] overflow-hidden">
+      <section className="relative w-full min-h-[450px] lg:min-h-[600px] flex items-center bg-[#13171F] overflow-hidden">
 
         {/* Background Image Setup natively mimicking Section 3 */}
         <div className="absolute inset-0 z-0 flex justify-end">
@@ -736,7 +737,7 @@ export default function Home() {
         </div>
 
         {/* Core Content constrained in 1300px centered frame over the cinematic background */}
-        <div className="w-full max-w-[1300px] flex flex-col md:flex-row items-center justify-start z-10 w-full relative py-12 md:py-20 mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="w-full max-w-[1300px] flex flex-col md:flex-row items-center justify-start z-10 w-full relative py-12 md:py-28 mx-auto px-6 sm:px-10 lg:px-16">
 
           {/* Subtle Orange Graphic Aura (kept for thematic flair, positioned behind text) */}
           <div className="absolute top-[30%] left-[10%] w-[350px] h-[350px] bg-[#FF7A00]/[0.08] blur-[100px] rounded-full z-0 pointer-events-none" />
@@ -744,17 +745,17 @@ export default function Home() {
           {/* Left Side: Content Box directly overlaying the fade */}
           <div className="w-full md:w-[50%] lg:w-[45%] flex flex-col items-start relative z-10">
 
-            <h2 className="text-[22px] sm:text-[26px] lg:text-[32px] font-extrabold leading-[1.05] tracking-tight mb-5">
+            <h2 className="text-[22px] sm:text-[26px] lg:text-[38px] font-extrabold leading-[1.05] tracking-tight mb-5">
               <span className="text-white block">Doorstep Convenience.</span>
               <span className="text-[#FF7A00] block mt-1">Maximum Comfort.</span>
             </h2>
 
-            <p className="text-[11.5px] sm:text-[12px] lg:text-[13px] font-medium text-gray-400 leading-relaxed mb-8 max-w-[90%]">
+            <p className="text-[11.5px] sm:text-[12px] lg:text-[19px] font-medium text-gray-400 leading-relaxed mb-8 max-w-[90%]">
               No need to visit a workshop. We bring the service to your doorstep — at your home, office or anywhere in your city.
             </p>
 
             {/* Feature List */}
-            <div className="flex flex-col gap-1.5 sm:gap-2.5 w-full ml-1">
+            <div className="flex flex-col gap-3 sm:gap-4 lg:gap-6 w-full ml-1">
               {[
                 { title: 'Home Service', icon: HomeIcon },
                 { title: 'Office Service', icon: Building2 }, // Used Building2 as approximation for Office
@@ -768,7 +769,7 @@ export default function Home() {
                     <div className="absolute inset-0 border-[1.5px] border-[#FF7A00] border-r-transparent border-t-transparent -rotate-[45deg] rounded-full opacity-80" />
                     <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white transition-colors" strokeWidth={2} />
                   </div>
-                  <span className="text-[11.5px] sm:text-[13px] font-bold text-gray-200 tracking-wider group-hover:text-[#FF7A00] transition-colors">
+                  <span className="text-[11.5px] sm:text-[13px] font-bold text-gray-200 tracking-wider group-hover:text-[#FF7A00] transition-colors md:text-[19px]">
                     {item.title}
                   </span>
                 </div>
@@ -784,19 +785,19 @@ export default function Home() {
         <div className="w-full max-w-[1300px] grid grid-cols-1 md:grid-cols-3 items-center gap-10 md:gap-4 lg:gap-10 relative z-10 mx-auto">
 
           {/* Column 1: Typography & CTA */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-span-1 z-20 md:translate-x-12 lg:translate-x-[120px] xl:translate-x-[180px] order-1 md:order-1 mt-6 md:mt-0">
-            <span className="text-[11px] sm:text-[12px] uppercase font-extrabold tracking-[0.25em] text-gray-400 mb-3">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-span-1 z-20 md:translate-x-0 lg:translate-x-[20px] xl:translate-x-[40px] order-1 md:order-1 mt-6 md:mt-0">
+            <span className="text-[11px] sm:text-[12px] uppercase font-extrabold tracking-[0.25em] text-gray-400 mb-3 md:text-[16px]">
               OUR PROMISE
             </span>
-            <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-extrabold leading-[1.05] tracking-tight mb-4">
+            <h2 className="text-[28px] sm:text-[36px] lg:text-[44px] font-extrabold leading-[1.05] tracking-tight mb-4">
               <span className="text-[#1A1A1A] block">Quality Service.</span>
               <span className="text-[#FF7A00] block mt-1">Every Time.</span>
             </h2>
-            <p className="text-[13px] sm:text-[14px] lg:text-[15px] font-medium text-[#475569] leading-relaxed mb-8 max-w-[90%] md:max-w-[85%]">
+            <p className="text-[13px] sm:text-[14px] lg:text-[18px] font-medium text-[#475569] leading-relaxed mb-8 max-w-[90%] md:max-w-[85%]">
               Your car deserves the best. And we&apos;re here to deliver it — at your doorstep.
             </p>
             <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="relative overflow-hidden bg-gradient-to-r from-[#FF512F] to-[#F09819] px-6 py-3 md:px-5 md:py-2.5 rounded-full shadow-[0_8px_20px_rgba(255,122,0,0.2)] flex items-center justify-center group transition-transform hover:scale-[1.02]">
-              <span className="relative z-10 text-white font-bold text-[13px] flex items-center gap-1.5 tracking-wide">
+              <span className="relative z-10 text-white font-bold text-[13px] flex items-center gap-1.5 tracking-wide md:text-[17px]">
                 Book Your Service
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </span>
@@ -815,24 +816,26 @@ export default function Home() {
           </div>
 
           {/* Column 3: Feature Pills List */}
-          <div className="flex flex-col gap-3 md:gap-5 items-start md:items-end md:col-span-1 z-20 md:-translate-x-24 lg:-translate-x-[250px] xl:-translate-x-[350px] order-2 md:order-3 w-full">
+          <div className="flex flex-col gap-3 md:gap-5 items-start md:items-end md:col-span-1 z-20 md:-translate-x-0 lg:-translate-x-[60px] xl:-translate-x-[120px] order-2 md:order-3 w-full">
             {[
               { title: '100% Genuine Parts', icon: ShieldCheck },
               { title: 'Trained Technicians', icon: UserCheck },
               { title: 'On-Time Delivery', icon: Clock },
               { title: 'Affordable Pricing', icon: Tag },
             ].map((feature, idx) => (
-              <div key={idx} className="flex items-center gap-3 md:gap-4 bg-white pl-3 pr-4 md:pr-5 py-2.5 md:py-3 rounded-[14px] shadow-[0_10px_25px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_15px_30px_rgba(255,122,0,0.06)] transition-all flex-row md:flex-row-reverse w-full sm:w-[90%] md:w-auto">
-                {/* Feature Text */}
-                <span className="text-[12px] lg:text-[13px] font-bold text-[#1A1A1A] md:w-[125px] lg:w-[140px] text-left md:text-right leading-tight whitespace-nowrap md:whitespace-normal">
-                  {feature.title}
-                </span>
+              <div key={idx} className="flex items-center gap-3 md:gap-4 bg-white pl-3 pr-4 md:pr-5 py-2.5 md:py-3 rounded-[14px] shadow-[0_10px_25px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_15px_30px_rgba(255,122,0,0.06)] transition-all flex-row w-full sm:w-[90%] md:w-[230px] lg:w-[250px] xl:w-[270px]">
 
                 {/* Custom Icon Circle */}
                 <div className="relative w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center rounded-full bg-white shadow-[0_3px_8px_rgba(0,0,0,0.04)] border border-gray-50 flex-shrink-0">
                   <div className="absolute inset-0 border-[1.5px] border-[#FF7A00] border-r-transparent border-t-transparent -rotate-[45deg] rounded-full opacity-70" />
                   <feature.icon className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#475569]" strokeWidth={2.2} />
                 </div>
+
+                {/* Feature Text */}
+                <span className="text-[12px] md:text-[15px] lg:text-[17px] font-bold text-[#1A1A1A] text-left leading-tight whitespace-nowrap">
+                  {feature.title}
+                </span>
+
               </div>
             ))}
           </div>
@@ -841,7 +844,7 @@ export default function Home() {
       </section>
 
       {/* 7th Section - Final CTA Cinematic Banner */}
-      <section className="relative w-full min-h-[300px] md:min-h-[350px] lg:min-h-[380px] flex items-center bg-[#111111] overflow-hidden mt-4 md:mt-6">
+      <section className="relative w-full min-h-[300px] md:min-h-[350px] lg:min-h-[480px] flex items-center bg-[#111111] overflow-hidden mt-4 md:mt-6">
 
         {/* Full-Bleed Absolute Background Array */}
         <div className="absolute inset-0 z-0">
@@ -856,15 +859,15 @@ export default function Home() {
 
         {/* Unobstructed Content Wrapper */}
         <div className="w-full max-w-[1300px] flex flex-col items-start z-10 mx-auto relative px-6 sm:px-10 lg:px-16 py-8 md:py-10">
-          <div className="flex flex-col items-start max-w-[90%] md:max-w-[500px] md:ml-12 lg:ml-24 xl:ml-32">
-            <h2 className="text-[26px] sm:text-[32px] lg:text-[38px] font-extrabold text-white leading-[1.05] tracking-tight mb-3">
+          <div className="flex flex-col items-start max-w-[90%] md:max-w-[500px] md:ml-6 lg:ml-12 xl:ml-16">
+            <h2 className="text-[26px] sm:text-[32px] lg:text-[40px] font-extrabold text-white leading-[1.05] tracking-tight mb-3">
               Your Car. Our Priority.
             </h2>
-            <p className="text-[12px] sm:text-[13px] lg:text-[14px] font-medium text-gray-300 leading-[1.6] tracking-wide mb-7 max-w-[300px]">
-              Book your service today and experience<br className="hidden sm:block" /> the convenience of doorstep car care.
+            <p className="text-[12px] sm:text-[13px] lg:text-[18px] font-medium text-gray-300 leading-[1.6] tracking-wide mb-7 max-w-[300px] lg:max-w-[600px]">
+              Book your service today and experience<br />the convenience of doorstep car care.
             </p>
             <button onClick={() => { if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('openBookingModal')); }} className="relative overflow-hidden bg-gradient-to-r from-[#FF512F] to-[#F09819] px-5 py-2.5 rounded-full shadow-[0_8px_20px_rgba(255,122,0,0.25)] flex items-center justify-center group transition-transform hover:scale-[1.02]">
-              <span className="relative z-10 text-white font-bold text-[12px] flex items-center gap-1.5 tracking-wide">
+              <span className="relative z-10 text-white font-bold text-[12px] flex items-center gap-1.5 tracking-wide md:text-[16px]">
                 Book Now
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </span>
@@ -875,25 +878,25 @@ export default function Home() {
       </section>
 
       {/* 8th Section - Premium Dark Footer */}
-      <footer className="w-full bg-[#0F141A] pt-10 lg:pt-12 pb-4 lg:pb-5 px-6 sm:px-10 lg:px-16 flex flex-col items-center">
-        <div className="w-full max-w-[1150px] flex flex-col md:flex-row justify-between items-start gap-10 md:gap-4 lg:gap-8 mx-auto relative z-10 overflow-hidden">
+      <footer className="w-full bg-[#0F141A] pt-16 lg:pt-24 pb-8 lg:pb-12 px-6 sm:px-10 lg:px-16 flex flex-col items-center">
+        <div className="w-full max-w-[1300px] flex flex-col md:flex-row justify-between items-start gap-12 md:gap-10 lg:gap-20 mx-auto relative z-10 overflow-hidden">
 
           {/* Column 1: Branding & Social (Left Anchor) */}
-          <div className="flex flex-col items-start pr-2 md:pr-4 md:w-[25%] lg:w-[30%] shrink-0">
+          <div className="flex flex-col items-start pr-2 md:pr-4 md:w-[25%] lg:w-[30%] shrink-0 md:-translate-y-3 lg:-translate-y-5">
             <a href="/" className="flex items-center gap-2 mb-4 group cursor-pointer">
               <img src="/autotricks logo.png" alt="AutoTricks" className="h-[75px] md:h-[90px] xl:h-[105px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" />
             </a>
-            <p className="text-[12px] font-medium text-gray-500 mb-6 tracking-wide">
+            <p className="text-[12px] font-medium text-gray-500 mb-6 tracking-wide md:text-[16px]">
               Car Service. At Your Doorstep.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               {[
                 { Icon: InstagramIcon, href: 'https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5' },
                 { Icon: FacebookIcon, href: '#' },
                 { Icon: YoutubeIcon, href: '#' }
               ].map((social, idx) => (
-                <a key={idx} href={social.href} target={social.href !== '#' ? "_blank" : undefined} rel={social.href !== '#' ? "noopener noreferrer" : undefined} className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 hover:border-white/20 transition-colors">
-                  <social.Icon className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                <a key={idx} href={social.href} target={social.href !== '#' ? "_blank" : undefined} rel={social.href !== '#' ? "noopener noreferrer" : undefined} className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 hover:border-white/20 transition-colors">
+                  <social.Icon className="w-4 h-4 md:w-5 md:h-5 text-gray-400 shrink-0" />
                 </a>
               ))}
             </div>
@@ -903,8 +906,8 @@ export default function Home() {
           <div className="w-full md:w-auto grid grid-cols-2 sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-16 xl:gap-20 md:ml-auto">
             {/* Column 2: Quick Links */}
             <div className="flex flex-col items-start order-2 sm:order-1">
-              <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Quick Links</h4>
-              <ul className="flex flex-col gap-3.5">
+              <h4 className="text-white font-bold text-[12px] md:text-[16px] xl:text-[17px] mb-5 md:mb-8 tracking-wide whitespace-nowrap">Quick Links</h4>
+              <ul className="flex flex-col gap-3.5 md:gap-5">
                 {[
                   { name: 'Home', href: '#home' },
                   { name: 'Services', href: '#services' },
@@ -913,7 +916,7 @@ export default function Home() {
                   { name: 'About', href: '/about' }
                 ].map((link, idx) => (
                   <li key={idx}>
-                    <a href={link.href} className="text-[12px] font-medium text-gray-400 hover:text-white transition-colors cursor-pointer block">
+                    <a href={link.href} className="text-[12px] font-medium text-gray-400 hover:text-white transition-colors cursor-pointer block md:text-[16px]">
                       {link.name}
                     </a>
                   </li>
@@ -923,11 +926,11 @@ export default function Home() {
 
             {/* Column 3: Our Services */}
             <div className="flex flex-col items-start order-1 sm:order-2">
-              <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Our Services</h4>
-              <ul className="flex flex-col gap-3.5">
+              <h4 className="text-white font-bold text-[12px] md:text-[16px] xl:text-[17px] mb-5 md:mb-8 tracking-wide whitespace-nowrap">Our Services</h4>
+              <ul className="flex flex-col gap-3.5 md:gap-5">
                 {['Periodic Service', 'Engine Diagnostics', 'Brake Service', 'AC Service', 'General Repairs'].map((service, idx) => (
                   <li key={idx}>
-                    <span className="text-[12px] font-medium text-gray-400 hover:text-white transition-colors cursor-pointer">
+                    <span className="text-[12px] font-medium text-gray-400 hover:text-white transition-colors cursor-pointer md:text-[16px]">
                       {service}
                     </span>
                   </li>
@@ -937,19 +940,19 @@ export default function Home() {
 
             {/* Column 4: Contact Us */}
             <div className="flex flex-col items-start col-span-2 sm:col-span-1 pt-2 sm:pt-0 order-3 md:order-3">
-              <h4 className="text-white font-bold text-[12px] xl:text-[13px] mb-5 tracking-wide whitespace-nowrap">Contact Us</h4>
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                  <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                  <span className="text-[12px] font-medium text-gray-400">+91 87543 99388</span>
+              <h4 className="text-white font-bold text-[12px] md:text-[16px] xl:text-[17px] mb-5 md:mb-8 tracking-wide whitespace-nowrap">Contact Us</h4>
+              <div className="flex flex-col gap-4 md:gap-6">
+                <div className="flex items-center gap-4">
+                  <Phone className="w-4 h-4 md:w-5 md:h-5 text-gray-400 shrink-0" strokeWidth={2.2} />
+                  <span className="text-[12px] font-medium text-gray-400 md:text-[16px]">+91 87543 99388</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                  <span className="text-[12px] font-medium text-gray-400">autotricks08@gmail.com</span>
+                <div className="flex items-center gap-4">
+                  <Mail className="w-4 h-4 md:w-5 md:h-5 text-gray-400 shrink-0" strokeWidth={2.2} />
+                  <span className="text-[12px] font-medium text-gray-400 md:text-[16px]">autotricks08@gmail.com</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={2.2} />
-                  <span className="text-[12px] font-medium text-gray-400">Coimbatore, Tamil Nadu</span>
+                <div className="flex items-center gap-4">
+                  <MapPin className="w-4 h-4 md:w-5 md:h-5 text-gray-400 shrink-0" strokeWidth={2.2} />
+                  <span className="text-[12px] font-medium text-gray-400 md:text-[16px]">Coimbatore, Tamil Nadu</span>
                 </div>
               </div>
             </div>
@@ -959,8 +962,8 @@ export default function Home() {
         </div>
 
         {/* Footer Bottom Divider Area */}
-        <div className="w-full max-w-[1150px] mx-auto mt-8 lg:mt-10 pt-4 md:pt-5 border-t border-white/[0.04] flex items-center justify-center">
-          <span className="text-[11px] font-medium text-gray-600">
+        <div className="w-full max-w-[1300px] mx-auto mt-12 lg:mt-20 pt-6 md:pt-8 border-t border-white/[0.04] flex items-center justify-center">
+          <span className="text-[11px] font-medium text-gray-600 md:text-[15px]">
             © {new Date().getFullYear()} AutoTricks. All rights reserved.
           </span>
         </div>
@@ -968,11 +971,11 @@ export default function Home() {
 
       {/* Floating Social Icons */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <a href="https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group border border-gray-100 relative">
-          <InstagramIconExact className="w-4 h-4 text-[#E1306C]" />
+        <a href="https://www.instagram.com/autotricks08?stkn=c21vaXRpOXh2MWE5" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group border border-gray-100 relative">
+          <InstagramIconExact className="w-5 h-5 md:w-6 md:h-6 text-[#E1306C]" />
         </a>
-        <a href="https://wa.me/918754399388?text=Hi%20AutoTricks,%20I%20would%20like%20to%20book%20a%20service." target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group relative">
-          <WhatsAppIconExact className="w-4 h-4 text-white" />
+        <a href="https://wa.me/918754399388?text=Hi%20AutoTricks,%20I%20would%20like%20to%20book%20a%20service." target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:scale-110 transition-transform group relative">
+          <WhatsAppIconExact className="w-5 h-5 md:w-6 md:h-6 text-white" />
         </a>
       </div>
     </div>
